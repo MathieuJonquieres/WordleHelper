@@ -1,17 +1,17 @@
 WORD_SIZE = 5
 
 def resoudre(mots, possible):
-
     resultats=mots
-    for i in range(WORD_SIZE):
-        for lettre in possible[i]:
-            resultats=filtrerLettreFixeMot(resultats,lettre, i)
+    #Parcours inversé pour ordre alphabetique
+    for i in range(WORD_SIZE-1,-1,-1):
+        resultats=filtrerLettreFixeMot(possible, resultats,i)
     return resultats
 
-def filtrerLettreFixeMot(mots:list, lettre:str, pos:int):
+def filtrerLettreFixeMot(possible:list, mots:list,  pos:int):
     resultats=[]
-    for mot in mots:
-        #Ajoute si la lettre est bien place
-        if mot[pos]==lettre:
-            resultats.append(mot)
+    for lettre in possible[pos]:
+        for mot in mots:
+            #Ajoute si la lettre est bien place
+            if mot[pos]==lettre:
+                resultats.append(mot)
     return resultats
