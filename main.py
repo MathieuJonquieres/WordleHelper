@@ -41,7 +41,7 @@ def solution(possible,mots):
                     lettre = input("Lettre a retirer : ")
 
                 pos = int(input("Entrez la position de la lettre à retirer (0=all) : "))
-                while pos>5 or pos<0:
+                while pos>WORD_SIZE or pos<0:
                     pos = int(input("Entrez la position de la lettre à retirer (0=all) : "))
 
                 retirerLettre(possible,pos,lettre)
@@ -50,7 +50,7 @@ def solution(possible,mots):
                 exit(0)
         sleep(1)
 
-def start(options : int):
+def start(options : int=1):
     with open('data.json') as json_file:
         dictionnaire = list(json.load(json_file))
 
@@ -73,7 +73,6 @@ def start(options : int):
             ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
             ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']]
             
-            
     else:
         possible=[]
         for indice in range(WORD_SIZE):
@@ -86,8 +85,9 @@ def start(options : int):
 '''
 Choisir 0 pour pouvoir choisir les lettres a l'avance depuis l'editeur
     (permet d'avoir un ensemble de lettres déjà prédéfinies)
+Risque d'erreur si modification de la taille du mot recherché!
 
 Choisir un autre entier pour commencer avec toutes les lettres
     (plus long car il faut éditer les lettres possibles depuis la console avec l'option 2)
 '''
-start(0)
+start()
