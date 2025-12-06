@@ -16,14 +16,21 @@ def filtrerLettreMot(possible:list, mots:list, pos:int):
                 resultats.append(mot)
     return resultats
 
-def filtrerLettreMalPlaceMot(malPlace, mots):
+def filtrerLettreMalPlaceMot(malPlace:dict, mots):
     resultats = []
     for mot in mots:
-        ok=True
-        for pos in range(WORD_SIZE):
-            if mot[pos] in malPlace:
-                if pos not in malPlace[mot[pos]]:
-                    ok = False
-        if ok:
+        print(mot)
+        ajout=True
+        for lettre in malPlace:
+            print('3')
+            ok=False
+            for pos in malPlace[lettre]:
+                if lettre == mot[pos-1]:
+                    print('ok')
+                    ok=True
+            if not ok:
+                print('mot retirer',mot)
+                ajout=False
+        if ajout:
             resultats.append(mot)
     return resultats

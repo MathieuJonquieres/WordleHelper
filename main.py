@@ -21,11 +21,11 @@ def start(options : int=1):
             ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
             ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']]
             """
-            possible=[['a', 'f', 'i', 'j', 'k', 'q', 't', 'v', 'w', 'z'],
-            ['w'],
-            ['a', 'f', 'i', 'j', 'k', 'q', 's', 'v', 'w', 'z'],
-            ['f', 'i', 'j', 'k', 'q', 's', 't', 'v', 'w', 'z'],
-            ['a', 'f', 'i', 'j', 'k', 'q', 't', 'v', 'w', 'z']]
+            possible=[['a','l','t'],
+            ['a','w','y'],
+            ['a','r'],
+            ['i'],
+            ['c','f','t']]
             
     else:
         possible=[]
@@ -45,4 +45,4 @@ Risque d'erreur si modification de la taille du mot recherché!
 Choisir un autre entier pour commencer avec toutes les lettres
     (plus long car il faut éditer les lettres possibles depuis la console avec l'option 2)
 '''
-start(0)
+start()

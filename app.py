@@ -47,12 +47,13 @@ def solution(possible, malPlace, mots):
                     case 2:
                         lettre,pos = lettreInput("Lettre mal placée : ",
                                                  "Entrez la position de la lettre mal placée : ",1)
+                        lettre = convertisseurMinuscule(lettre)
                         if lettre not in malPlace:
-                            lettre = convertisseurMinuscule(lettre)
                             malPlace[lettre]=[]
                             for i in range(WORD_SIZE):
-                                malPlace[lettre]+=[i]
-                        malPlace[lettre].remove(pos)
+                                malPlace[lettre]+=[i+1]
+                        if (pos) in malPlace[lettre]:
+                            malPlace[lettre].remove(pos)
                         
 
                     case 3:
