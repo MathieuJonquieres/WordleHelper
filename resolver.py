@@ -7,6 +7,15 @@ def resoudre(mots, possible, malPlace):
     resultats = filtrerLettreMalPlaceMot(malPlace, resultats)
     return resultats
 
+def motUnique(mots, possible, lettreUtil):
+    resultats=mots
+    for i in range(WORD_SIZE-1,-1,-1):
+        resultats=filtrerLettreMot(possible, resultats,i)
+    resultats = filtrerLettreNonUniqueMot(lettreUtil, resultats)
+    return resultats
+
+
+
 def filtrerLettreMot(possible:list, mots:list, pos:int):
     resultats=[]
     for lettre in possible[pos]:
@@ -17,19 +26,38 @@ def filtrerLettreMot(possible:list, mots:list, pos:int):
     return resultats
 
 def filtrerLettreMalPlaceMot(malPlace:dict, mots):
+    """
     resultats = []
     for mot in mots:
-        print(mot)
         ajout=True
         for lettre in malPlace:
-            print('3')
             ok=False
             for pos in malPlace[lettre]:
                 if lettre == mot[pos-1]:
-                    print('ok')
                     ok=True
             if not ok:
-                print('mot retirer',mot)
+                ajout=False
+        if ajout:
+            resultats.append(mot)
+    return resultats
+    """
+
+    resultats = []
+    for mot in mots:
+        ajout=True
+        for lettre in malPlace:
+            if lettre not in mot:
+                ajout = False
+        if ajout:
+            resultats.append(mot)
+    return resultats
+
+def filtrerLettreNonUniqueMot(lettreUnique:set, mots):
+    resultats = []
+    for mot in mots:
+        ajout=True
+        for lettre in mot:
+            if lettre in lettreUnique:
                 ajout=False
         if ajout:
             resultats.append(mot)

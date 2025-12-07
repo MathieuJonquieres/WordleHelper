@@ -42,7 +42,7 @@ Choisir 0 pour pouvoir choisir les lettres a l'avance depuis l'editeur
     (permet d'avoir un ensemble de lettres déjà prédéfinies)
 Risque d'erreur si modification de la taille du mot recherché!
 
-Choisir un autre entier pour commencer avec toutes les lettres
+Laisser vide pour utiliser une liste forme WORD_SIZE * 26
     (plus long car il faut éditer les lettres possibles depuis la console avec l'option 2)
 '''
 start()
