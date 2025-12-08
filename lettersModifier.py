@@ -1,46 +1,50 @@
 WORD_SIZE = 5
-'''
-Permet d'ajouter une lettre ou de la retirer en fonction du booleen en entree
-La lettre sera ajoute/retire de la liste au rang pos, toute si pos = 0 
-'''
-def ajouterLettre(possible : list, lettre :str, pos:int):
-    lettre = convertisseurMinuscule(lettre)
+
+def addLetter(possibility : list, letter :str, pos:int):
+    '''
+    Add the [letter] into [possibility] at the [pos] position
+    If the [pos] add the letter into all [possibility] list
+    '''
+    letter = lowercaseConverter(letter)
     match pos:
         case 0:
-            for indice in range(WORD_SIZE):
-                if lettre not in possible[indice]:
-                    possible[indice].append(lettre)
-                    possible[indice].sort()
+            for index in range(WORD_SIZE):
+                if letter not in possibility[index]:
+                    possibility[index].append(letter)
+                    possibility[index].sort()
         case others:
-            if lettre not in possible[pos-1]:
-                possible[pos-1].append(lettre)
-                possible[pos-1].sort()
+            if letter not in possibility[pos-1]:
+                possibility[pos-1].append(letter)
+                possibility[pos-1].sort()
 
-def retirerLettre(possible : list, lettre :str):
-     for indice in range(WORD_SIZE):
-        if lettre in possible[indice]:
-            possible[indice].remove(lettre)
+def delLetter(possibility : list, letter :str):
+    '''
+    Delete the [letter] from all [possibility] list
+    '''
+    for index in range(WORD_SIZE):
+        if letter in possibility[index]:
+            possibility[index].remove(letter)
 
-def ajouterMalPlace(possible, malPlace, lettreUtil, lettre, pos):
-    if (lettre not in malPlace) and (lettre in possible[pos]):
-        malPlace[lettre]=[]
+def addIncorrect(possibility, incorrect, letterUsed, letter, pos):
+    if (letter not in incorrect) and (letter in possibility[pos-1]):
+        incorrect[letter]=[]
         for i in range(WORD_SIZE):
-            malPlace[lettre]+=[i+1]
-    if lettre in malPlace:
-        if pos in malPlace[lettre]:
-            malPlace[lettre].remove(pos)
-            possible[pos].remove(lettre)
-    lettreUtil.add(lettre)
+            incorrect[letter]+=[i+1]
+    if letter in incorrect:
+        if pos in incorrect[letter]:
+            incorrect[letter].remove(pos)
+            possibility[pos-1].remove(letter)
+    letterUsed.add(letter)
          
 
-def lettreInput(text:str):
-    lettre = input(text)
-    while(len(lettre)!=1 
-            & (ord('a')<=ord(lettre[0])<=ord('z')
-            or ord('A')<=ord(lettre[0])<=ord('Z'))):
-                lettre = input(text)
-    lettre = convertisseurMinuscule(lettre)
-    return lettre
+def letterInput(text:str):
+    letter = input(text)
+    while(len(letter)!=1 
+            & (ord('a')<=ord(letter[0])<=ord('z')
+            or ord('A')<=ord(letter[0])<=ord('Z'))):
+                letter = input(text)
+    letter = lowercaseConverter(letter)
+    return letter
 
 def posInput(text, minPos:int):
     pos = -1
@@ -48,7 +52,7 @@ def posInput(text, minPos:int):
         pos = int(input(text))
     return pos
 
-def convertisseurMinuscule(lettre:str):
-    if(ord('A')<=ord(lettre[0])<=ord('Z')):
-        lettre = str(chr(ord(lettre[0])-(ord('A')-ord('a'))))
-    return lettre
+def lowercaseConverter(letter:str):
+    if(ord('A')<=ord(letter[0])<=ord('Z')):
+        letter = str(chr(ord(letter[0])-(ord('A')-ord('a'))))
+    return letter

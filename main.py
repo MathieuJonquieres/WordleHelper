@@ -4,45 +4,39 @@ import json
 
 
 
-def start(options : int=1):
+def start(option: int=1):
     with open('data.json') as json_file:
-        dictionnaire = list(json.load(json_file))
+        dictionnary = list(json.load(json_file))
 
-    mots = []
-    for mot in dictionnaire:
-        if(len(mot)==WORD_SIZE):
-            mots.append(mot)
+    wordsList = []
+    for word in dictionnary:
+        if(len(word)==WORD_SIZE):
+            wordsList.append(word)
 
-    if(options==0):
+    if(option==0):
             """
-            possible=[['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
+            possibility=[['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
             ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
             ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
             ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
             ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']]
             """
-            possible=[['a','l','t'],
+            possibility=[['a','l','t'],
             ['a','w','y'],
             ['a','r'],
             ['i'],
             ['c','f','t']]
             
     else:
-        possible=[]
-        for indice in range(WORD_SIZE):
-            possible.append([])
+        possibility=[]
+        for index in range(WORD_SIZE):
+            possibility.append([])
             for letters in range(26):
-                possible[indice].append(chr(ord('a')+letters))
-    malPlace={}
-
-    solution(possible, malPlace, mots)
+                possibility[index].append(chr(ord('a')+letters))
+    solution(possibility, wordsList)
 
 '''
-Choisir 0 pour pouvoir choisir les lettres a l'avance depuis l'editeur
-    (permet d'avoir un ensemble de lettres déjà prédéfinies)
-Risque d'erreur si modification de la taille du mot recherché!
-
-Laisser vide pour utiliser une liste forme WORD_SIZE * 26
-    (plus long car il faut éditer les lettres possibles depuis la console avec l'option 2)
+Enter start(0) to customize the letters choice directly from the script
+Enter start() to customize the letters choice from the terminal
 '''
 start()

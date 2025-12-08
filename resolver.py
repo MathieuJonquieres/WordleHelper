@@ -1,64 +1,45 @@
 from lettersModifier import WORD_SIZE
-def resoudre(mots, possible, malPlace):
-    resultats=mots
-    #Parcours inversé pour ordre alphabetique
+def resolve(wordsList, possibility, incorrect):
+    results=wordsList
     for i in range(WORD_SIZE-1,-1,-1):
-        resultats=filtrerLettreMot(possible, resultats,i)
-    resultats = filtrerLettreMalPlaceMot(malPlace, resultats)
-    return resultats
+        results=filterWordLetters(possibility, results,i)
+    results = filterWordIncorrectLetters(incorrect, results)
+    return results
 
-def motUnique(mots, possible, lettreUtil):
-    resultats=mots
+def uniqueWords(wordsList, possibility, letterUsed):
+    results=wordsList
     for i in range(WORD_SIZE-1,-1,-1):
-        resultats=filtrerLettreMot(possible, resultats,i)
-    resultats = filtrerLettreNonUniqueMot(lettreUtil, resultats)
-    return resultats
+        results=filterWordLetters(possibility, results,i)
+    results = filterWordNonUniqueLetters(letterUsed, results)
+    return results
 
+def filterWordLetters(possibility:list, wordsList:list, pos:int):
+    results=[]
+    for letter in possibility[pos]:
+        for word in wordsList:
+            #Add the letter if the placement is correct
+            if word[pos]==letter:
+                results.append(word)
+    return results
 
-
-def filtrerLettreMot(possible:list, mots:list, pos:int):
-    resultats=[]
-    for lettre in possible[pos]:
-        for mot in mots:
-            #Ajoute si la lettre est bien place
-            if mot[pos]==lettre:
-                resultats.append(mot)
-    return resultats
-
-def filtrerLettreMalPlaceMot(malPlace:dict, mots):
-    """
-    resultats = []
-    for mot in mots:
+def filterWordIncorrectLetters(incorrect:dict, wordsList):
+    results = []
+    for word in wordsList:
         ajout=True
-        for lettre in malPlace:
-            ok=False
-            for pos in malPlace[lettre]:
-                if lettre == mot[pos-1]:
-                    ok=True
-            if not ok:
-                ajout=False
-        if ajout:
-            resultats.append(mot)
-    return resultats
-    """
-
-    resultats = []
-    for mot in mots:
-        ajout=True
-        for lettre in malPlace:
-            if lettre not in mot:
+        for letter in incorrect:
+            if letter not in word:
                 ajout = False
         if ajout:
-            resultats.append(mot)
-    return resultats
+            results.append(word)
+    return results
 
-def filtrerLettreNonUniqueMot(lettreUnique:set, mots):
-    resultats = []
-    for mot in mots:
-        ajout=True
-        for lettre in mot:
-            if lettre in lettreUnique:
-                ajout=False
-        if ajout:
-            resultats.append(mot)
-    return resultats
+def filterWordNonUniqueLetters(uniqueLetter:set, wordsList):
+    results = []
+    for word in wordsList:
+        add=True
+        for letter in uniqueLetter:
+            if letter in word:
+                add=False
+        if add:
+            results.append(word)
+    return results
